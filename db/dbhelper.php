@@ -168,6 +168,14 @@ function ramble_all_combinations($number) {
     }
 
     return $combinations;
+
+    function deleteallrecords($table){
+        global $conn;
+        $sql = "truncate table $table";
+        connect();
+        $query = mysqli_query($conn, $sql);
+        disconnect();
+    }
 }
 
 

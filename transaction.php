@@ -13,6 +13,9 @@ if (isset($_POST['hidden-date'])) {
     $hiddenDate = $_POST['hidden-date'];
     $_SESSION['date'] = $hiddenDate; // Assign the value to $_SESSION['date']
 }
+if(isset($_GET['delete'])){
+    $okay = deleteallrecords('transaction');
+}
 
 ?>
 
@@ -80,6 +83,7 @@ if (isset($_POST['hidden-date'])) {
                     <!-- Tabs navs -->
 
                     <!-- Tabs content -->
+                    <input type="button" name="delete" value="DELETE ALL TRANSACTION">
                     <div class="tab-content" id="ex-with-icons-content">
                         <div class="tab-pane fade show active" id="ex-with-icons-tabs-1" role="tabpanel" aria-labelledby="ex-with-icons-tab-1">
                             <div class="table-responsive overflow-auto" id="table-container">
@@ -105,8 +109,13 @@ if (isset($_POST['hidden-date'])) {
                                             <th class="text-center table-dark">Amount</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="transaction-table-body-2pm">
+                                    
+                                    <tbody 
+                                    
+                                    id="transaction-table-body-2pm">
                                         <!-- Transaction data will be dynamically inserted here -->
+                                            
+                                        
                                     </tbody>
                                     <tfoot></tfoot>
                                 </table>
@@ -193,14 +202,15 @@ if (isset($_POST['hidden-date'])) {
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <li>
-                                        <a class="dropdown-item" href="user-index.php"><i class="fa fa-pencil"></i> Input Swertres</a>
+                                        <a class="dropdown-item" href="user-index.php">
+                                            <i class="fa fa-pencil"></i> Input Swertres</a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item bg-primary text-white" href="transaction.php"><i class="fa fa-bar-chart"></i> Payout Analysis</a>
                                     </li>
                                     <div class="dropdown-divider"></div>
                                     <li>
-                                        <a class="dropdown-item" href="db/logout.php?page=user"><i class="fa fa-sign-out"></i> Logout</a>
+                                        <a class="dropdown-item" href="db/logout.php?page=user" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa fa-sign-out"></i> Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -215,6 +225,25 @@ if (isset($_POST['hidden-date'])) {
 
         <div class="bg-dark h-50">
             <!-- this is the background dont touch this -->
+        </div>
+    </div>
+
+    <!-- Logout Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutModalLabel">Logout Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to logout?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                    <a href="db/logout.php?page=user" class="btn btn-primary">Logout</a>
+                </div>
+            </div>
         </div>
     </div>
 
